@@ -2,12 +2,10 @@ import turtle
 import random
 import time
 
-
 #screen setup
 screen = turtle.Screen()
-screen.setup(1000, 1000)
+screen.setup(1000, 700)
 screen.bgcolor("green")
-
 
 #goal1 setup
 goal1 = turtle.Turtle()
@@ -16,7 +14,6 @@ goal1.shape("square")
 goal1.penup()
 goal1.goto(-490, 0)
 goal1.turtlesize(stretch_wid=20, stretch_len=10)
-
 
 #goal2 setup
 goal2 = turtle.Turtle()
@@ -29,10 +26,23 @@ goal2.turtlesize(stretch_wid=20, stretch_len=10)
 #ball setup
 ball = turtle.Turtle()
 ball.color("#cdd4c7")
-ball.shape("triangle")
+ball.shape("circle")
 ball.penup()
 ball.goto(0, 0)
 ball.turtlesize(1.5)
+
+#ball movement
+ball_x = ball.xcor()
+ball_speed = 400
+
+def ball_move():
+    x = ball.xcor()
+    y = ball.ycor()
+    ball.forward(ball_speed)
+    x += ball_speed
+    # y += ball_speed
+    # x = ball.setx(x)
+    # y = ball.sety(y)
 
 
 #player 1 setup
@@ -65,7 +75,6 @@ def goalie2_move_down():
     y -= 50
     goalie2.sety(y)
 
-
 def goalie1_move_up():
     y = goalie1.ycor()
     y += 50
@@ -77,26 +86,8 @@ def goalie1_move_down():
     y -= 50
     goalie1.sety(y)
 
-
-def move_ball():
-
-    # 0 means randomize the x coordinate, 1 means randomize the y coordinate
-    random_coord = random.randint(0, 1)
-    # determine if the remaining coordinate will be negative or positive
-    sign = random.randint(0, 1)
-    x_pos = 500
-    y_pos = 500
-    if random_coord == 0:
-        x_pos = random.randint(-500, 500)
-        if sign == 1:
-            y_pos *= -1
-    else:
-        y_pos = random.randint(-500, 500)
-        if sign == 1:
-            x_pos *= -1
-
-    ball.goto(x_pos, y_pos)
-    print(x_pos, y_pos)
+def is_collided_with(self, run):
+    return self.rect.colliderect(run.rect)
 
 
 screen.listen()
@@ -105,10 +96,40 @@ screen.onkey(goalie2_move_down, 'Down')
 screen.onkey(goalie1_move_up, 'w')
 screen.onkey(goalie1_move_down, 's')
 
+ball_x = ball.xcor()
+g1_x = goalie1.xcor()
+ball_y = ball.ycor()
+g1_y = goalie1.xcor()
 
 while True:
+    angle = 72
     screen.update()
-    move_ball()
+    ball_move()
+
+    if ball.xcor() > 490:
+        ball.setx(480)
+        ball.left(angle)
+        ball_speed = ball_speed * -1
+
+    if ball.xcor() < -490:
+        ball.setx(-480)
+        ball.left(angle)
+        ball_speed = ball_speed * -1
+
+    if ball.ycor() > 340:
+        ball.sety(330)
+        ball.left(angle)
+        ball_speed = ball_speed * -1
+
+    if ball.ycor() < -340:
+        ball.sety(-330)
+        ball.left(angle)
+        # time.sleep(2)
+        ball_speed = ball_speed * -1
+
+    if ((ball.xcor() < goalie1.xcor() + 60 and ball.xcor() > goalie1.xcor() - 60) and (ball.ycor() < goalie1.ycor() + 60 and ball.ycor() > goalie1.ycor() - 60)):
+        print("colliosion")
+
 
 
 
