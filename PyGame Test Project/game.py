@@ -64,6 +64,17 @@ def ball_move():
     #     ball.backward(ball_speed)
     #     x += ball_speed
     #     ball.setx(x)
+    if(goalie2_score == 2 and goalie2_score > goalie1_score):
+        pen.clear()
+        pen.write("Goalie 2 won!", align="center", font=("Courier", 24, "normal"))
+        ball.goto(0,0)
+        return
+
+    if(goalie1_score == 2 and goalie1_score > goalie2_score):
+        pen.clear()
+        pen.write("Goalie 1 won!", align="center", font=("Courier", 24, "normal"))
+        ball.goto(0, 0)
+        return
     speed = 100
     sign = random.randint(0,1)
     if sign == 1:
@@ -73,10 +84,11 @@ def ball_move():
 
     if ball.xcor() <= -350:
         #ball.forward(-speed)
-        ball.goto(350, random.randint(-350, 350))
+        ball.goto(350, random.randint(-200, 200))
     if ball.xcor() >= 360:
         #ball.backward(speed)
-        ball.goto(-350, random.randint(-350, 350))
+        ball.goto(-350, random.randint(-200, 200))
+
 
 
 
@@ -139,11 +151,18 @@ g1_x = goalie1.xcor()
 ball_y = ball.ycor()
 g1_y = goalie1.xcor()
 
-
-while True:
+run = True
+while run:
     #angle = 72
     screen.update()
     ball_move()
+    if(goalie2_score == 2 and goalie2_score > goalie1_score):
+        pen.clear()
+        pen.write("Goalie 1 won!", align="center", font=("Courier", 24, "normal"))
+        time.sleep(5)
+        run = False
+    if(goalie1_score == 2 and goalie1_score > goalie2_score):
+        run = False
 
 
 
@@ -186,10 +205,11 @@ while True:
         print("collision2")
         goalie2_score+=1
         pen.clear()
-        pen.write("Goalie 2 : {}    Goalie 2: {}".format(
+        pen.write("Goalie 1 : {}    Goalie 2: {}".format(
             goalie1_score, goalie2_score), align="center",
             font=("Courier", 24, "normal"))
         ball.goto(-341, random.randint(-350, 350))
+
 
 
 
