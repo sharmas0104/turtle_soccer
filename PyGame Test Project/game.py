@@ -1,9 +1,11 @@
 import turtle
 
+
 #screen setup
 screen = turtle.Screen()
 screen.setup(1000, 1000)
 screen.bgcolor("green")
+
 
 #goal1 setup
 goal1 = turtle.Turtle()
