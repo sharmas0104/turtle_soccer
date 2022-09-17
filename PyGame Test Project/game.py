@@ -85,7 +85,9 @@ screen.onkey(goalie1_move_down, 's')
 
 ball_x = ball.xcor()
 ball_speed = 10
+
 def ball_move_x():
+
     x = ball.xcor()
     x += ball_speed
     x = ball.setx(x)
@@ -95,13 +97,16 @@ def ball_move_x():
 
 while True:
     screen.update()
+
     ball_move_x()
+    angle = random.randint(0,360)
     if ball.xcor() > 500:
         ball.setx(490)
         ball_speed = ball_speed * -1
     elif ball.xcor() < -500:
         ball.setx(-490)
         ball_speed = ball_speed * -1
+
 
 
 
