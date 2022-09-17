@@ -2,10 +2,12 @@ import turtle
 import random
 import time
 
+
 #screen setup
 screen = turtle.Screen()
 screen.setup(1000, 1000)
 screen.bgcolor("green")
+
 
 #goal1 setup
 goal1 = turtle.Turtle()
@@ -14,6 +16,7 @@ goal1.shape("square")
 goal1.penup()
 goal1.goto(-490, 0)
 goal1.turtlesize(stretch_wid=20, stretch_len=10)
+
 
 #goal2 setup
 goal2 = turtle.Turtle()
@@ -62,6 +65,7 @@ def goalie2_move_down():
     y -= 50
     goalie2.sety(y)
 
+
 def goalie1_move_up():
     y = goalie1.ycor()
     y += 50
@@ -76,9 +80,23 @@ def goalie1_move_down():
 
 def move_ball():
 
-    x_pos = random.randint(-500, 500)
-    y_pos = random.randint(-500,500)
+    # 0 means randomize the x coordinate, 1 means randomize the y coordinate
+    random_coord = random.randint(0, 1)
+    # determine if the remaining coordinate will be negative or positive
+    sign = random.randint(0, 1)
+    x_pos = 500
+    y_pos = 500
+    if random_coord == 0:
+        x_pos = random.randint(-500, 500)
+        if sign == 1:
+            y_pos *= -1
+    else:
+        y_pos = random.randint(-500, 500)
+        if sign == 1:
+            x_pos *= -1
+
     ball.goto(x_pos, y_pos)
+    print(x_pos, y_pos)
 
 
 screen.listen()
@@ -90,9 +108,8 @@ screen.onkey(goalie1_move_down, 's')
 
 while True:
     screen.update()
+    move_ball()
 
-    while ball.xcor() in range(-1000, 1000) and ball.ycor() in range (-1000, 1000):
-        move_ball()
 
 
 
