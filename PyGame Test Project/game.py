@@ -36,6 +36,15 @@ ball_x = ball.xcor()
 # ball_speed = 200
 speed = 100
 
+#pen
+pen = turtle.Turtle()
+pen.color("black")
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 300)
+pen.write("Goalie 1 : 0    Goalie 2: 0",
+             align="center", font=("Courier", 24, "normal"))
+
 def ball_move():
     # ball_speed = random.randint(0, 350)
     # x = ball.xcor()
@@ -54,14 +63,14 @@ def ball_move():
     speed = 100
     sign = random.randint(0,1)
     if sign == 1:
-       speed *= -1
-    while ball.xcor() in range(-350, 350):
+        speed *= -1
+    while ball.xcor() in range(-350, 360):
         ball.forward(speed)
 
     if ball.xcor() <= -350:
         #ball.forward(-speed)
         ball.goto(350, random.randint(-200, 200))
-    if ball.xcor() >= 350:
+    if ball.xcor() >= 360:
         #ball.backward(speed)
         ball.goto(-350, random.randint(-200, 200))
 
@@ -166,7 +175,6 @@ while True:
 
     if ((ball.xcor() < goalie2.xcor() + 60 and ball.xcor() > goalie2.xcor() - 60) and (ball.ycor() < goalie2.ycor() + 60 and ball.ycor() > goalie2.ycor() - 60)):
         print("collision2")
-
 
 
 
