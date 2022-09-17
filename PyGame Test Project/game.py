@@ -1,4 +1,5 @@
 import turtle
+import random
 
 
 #screen setup
@@ -26,10 +27,13 @@ goal2.turtlesize(stretch_wid=20, stretch_len=10)
 #ball setup
 ball = turtle.Turtle()
 ball.color("#cdd4c7")
-ball.shape("circle")
+ball.shape("triangle")
 ball.penup()
 ball.goto(0, 0)
 ball.turtlesize(1.5)
+
+#ball movement
+angle = random.randint(0, 360)
 
 #player 1 setup
 goalie1 = turtle.Turtle()
@@ -79,6 +83,26 @@ screen.onkey(goalie2_move_down, 'Down')
 screen.onkey(goalie1_move_up, 'w')
 screen.onkey(goalie1_move_down, 's')
 
+ball_x = ball.xcor()
+ball_speed = 10
+def ball_move_x():
+    x = ball.xcor()
+    x += ball_speed
+    x = ball.setx(x)
+
+
+
 
 while True:
     screen.update()
+    ball_move_x()
+    if ball.xcor() > 500:
+        ball.setx(490)
+        ball_speed = ball_speed * -1
+    elif ball.xcor() < -500:
+        ball.setx(-490)
+        ball_speed = ball_speed * -1
+
+
+
+
