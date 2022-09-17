@@ -93,23 +93,24 @@ screen.onkey(goalie1_move_down, 's')
 while True:
     screen.update()
     ball_move_x()
-    if ball.xcor() > 500:
-        ball.setx(490)
+
+    if ball.xcor() > 300:
+        ball.setx(290)
         ball.left(angle)
         ball_speed = ball_speed * -1
 
-    elif ball.xcor() < -500:
-        ball.setx(-490)
+    elif ball.xcor() < -300:
+        ball.setx(-290)
         ball.left(angle)
         ball_speed = ball_speed * -1
 
-    if ball.ycor() > 500:
-        ball.sety(490)
+    if ball.ycor() > 300:
+        ball.sety(290)
         ball.left(angle)
         ball_speed = ball_speed * -1
 
-    elif ball.ycor() < -500:
-        ball.setx(-490)
+    elif ball.ycor() < -300:
+        ball.setx(-250)
         ball.left(angle)
         ball_speed = ball_speed * -1
 
