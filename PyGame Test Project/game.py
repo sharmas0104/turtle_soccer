@@ -36,6 +36,10 @@ ball_x = ball.xcor()
 # ball_speed = 200
 speed = 100
 
+#pen score
+goalie1_score = 0
+goalie2_score = 0
+
 #pen
 pen = turtle.Turtle()
 pen.color("black")
@@ -69,10 +73,10 @@ def ball_move():
 
     if ball.xcor() <= -350:
         #ball.forward(-speed)
-        ball.goto(350, random.randint(-200, 200))
+        ball.goto(350, random.randint(-350, 350))
     if ball.xcor() >= 360:
         #ball.backward(speed)
-        ball.goto(-350, random.randint(-200, 200))
+        ball.goto(-350, random.randint(-350, 350))
 
 
 
@@ -170,11 +174,22 @@ while True:
 
     if ((ball.xcor() < goalie1.xcor() + 60 and ball.xcor() > goalie1.xcor() - 60) and (ball.ycor() < goalie1.ycor() + 60 and ball.ycor() > goalie1.ycor() - 60)):
         print("collision1")
-        #angle += 72
+        goalie1_score+=1
+        pen.clear()
+        pen.write("Goalie 1 : {}    Goalie 2: {}".format(
+            goalie1_score, goalie2_score), align="center",
+            font=("Courier", 24, "normal"))
+        ball.goto(341, random.randint(-350, 350))
 
 
     if ((ball.xcor() < goalie2.xcor() + 60 and ball.xcor() > goalie2.xcor() - 60) and (ball.ycor() < goalie2.ycor() + 60 and ball.ycor() > goalie2.ycor() - 60)):
         print("collision2")
+        goalie2_score+=1
+        pen.clear()
+        pen.write("Goalie 2 : {}    Goalie 2: {}".format(
+            goalie1_score, goalie2_score), align="center",
+            font=("Courier", 24, "normal"))
+        ball.goto(-341, random.randint(-350, 350))
 
 
 
