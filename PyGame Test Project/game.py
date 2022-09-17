@@ -26,7 +26,7 @@ goal2.turtlesize(stretch_wid=20, stretch_len=10)
 #ball setup
 ball = turtle.Turtle()
 ball.color("#cdd4c7")
-ball.shape("circle")
+ball.shape("triangle")
 ball.penup()
 ball.goto(0, 0)
 ball.turtlesize(1.5)
@@ -106,13 +106,13 @@ while True:
     screen.update()
     ball_move()
 
-    if ball.xcor() > 490:
-        ball.setx(480)
+    if ball.xcor() < goalie1.xcor():
+        ball.setx(goalie1.xcor() + 50)
         ball.left(angle)
         ball_speed = ball_speed * -1
 
-    if ball.xcor() < -490:
-        ball.setx(-480)
+    if ball.xcor() > goalie2.xcor():
+        ball.setx(goalie2.xcor() - 50)
         ball.left(angle)
         ball_speed = ball_speed * -1
 
@@ -128,7 +128,14 @@ while True:
         ball_speed = ball_speed * -1
 
     if ((ball.xcor() < goalie1.xcor() + 60 and ball.xcor() > goalie1.xcor() - 60) and (ball.ycor() < goalie1.ycor() + 60 and ball.ycor() > goalie1.ycor() - 60)):
-        print("colliosion")
+        print("collision1")
+        angle += 72
+        ball.left(angle)
+        ball_speed *= -1
+
+    if ((ball.xcor() < goalie2.xcor() + 60 and ball.xcor() > goalie2.xcor() - 60) and (ball.ycor() < goalie2.ycor() + 60 and ball.ycor() > goalie2.ycor() - 60)):
+        print("collision2")
+        ball_speed *= -1
 
 
 
