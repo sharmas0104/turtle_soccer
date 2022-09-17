@@ -33,16 +33,41 @@ ball.turtlesize(1.5)
 
 #ball movement
 ball_x = ball.xcor()
-ball_speed = 400
+# ball_speed = 200
+speed = 100
 
 def ball_move():
-    x = ball.xcor()
-    y = ball.ycor()
-    ball.forward(ball_speed)
-    x += ball_speed
-    # y += ball_speed
-    # x = ball.setx(x)
-    # y = ball.sety(y)
+    # ball_speed = random.randint(0, 350)
+    # x = ball.xcor()
+    # y = ball.ycor()
+    # while x in range(-350, 350):
+    #     ball.forward(ball_speed)
+    #     x += ball_speed
+    #     # y += ball_speed
+    #     ball.setx(x)
+    #     # y = ball.sety(y)
+    # if x >= 350:
+    #     #ball_speed *= -1
+    #     ball.backward(ball_speed)
+    #     x += ball_speed
+    #     ball.setx(x)
+    speed = 100
+    sign = random.randint(0,1)
+    if sign == 1:
+       speed *= -1
+    while ball.xcor() in range(-350, 350):
+        ball.forward(speed)
+
+    if ball.xcor() <= -350:
+        #ball.forward(-speed)
+        ball.goto(350, random.randint(-200, 200))
+    if ball.xcor() >= 350:
+        #ball.backward(speed)
+        ball.goto(-350, random.randint(-200, 200))
+
+
+
+
 
 
 #player 1 setup
@@ -101,41 +126,47 @@ g1_x = goalie1.xcor()
 ball_y = ball.ycor()
 g1_y = goalie1.xcor()
 
+
 while True:
-    angle = 72
+    #angle = 72
     screen.update()
     ball_move()
 
-    if ball.xcor() < goalie1.xcor():
-        ball.setx(goalie1.xcor() + 50)
-        ball.left(angle)
-        ball_speed = ball_speed * -1
 
-    if ball.xcor() > goalie2.xcor():
-        ball.setx(goalie2.xcor() - 50)
-        ball.left(angle)
-        ball_speed = ball_speed * -1
 
-    if ball.ycor() > 340:
-        ball.sety(330)
-        ball.left(angle)
-        ball_speed = ball_speed * -1
-
-    if ball.ycor() < -340:
-        ball.sety(-330)
-        ball.left(angle)
-        # time.sleep(2)
-        ball_speed = ball_speed * -1
+    # #if ball.xcor() <= 350:
+    # if ball.xcor() in range(300, 350):
+    #     ball.setx(goalie1.xcor() + 50)
+    #     ball.setheading(ball.heading() + 180 + random.randint(0, 60))
+    #     ball_speed = ball_speed * -1
+    #
+    # if ball.xcor() >= -350:
+    #     ball.setx(goalie2.xcor() - 50)
+    #     #ball.left(angle)
+    #     ball.setheading(ball.heading() + 180 + + random.randint(0, 60))
+    #     ball_speed = ball_speed * -1
+    #
+    # if ball.ycor() > 340:
+    #     ball.sety(330)
+    #     #ball.left(angle)
+    #     ball.setheading(ball.heading() + 180 + random.randint(0, 60))
+    #     ball_speed = ball_speed * -1
+    #
+    # if ball.ycor() < -340:
+    #     ball.sety(-330)
+    #     #ball.left(angle)
+    #     ball.setheading(ball.heading() + 360 + random.randint(0, 60))
+    #     # time.sleep(2)
+    #     ball_speed = ball_speed * -1
 
     if ((ball.xcor() < goalie1.xcor() + 60 and ball.xcor() > goalie1.xcor() - 60) and (ball.ycor() < goalie1.ycor() + 60 and ball.ycor() > goalie1.ycor() - 60)):
         print("collision1")
-        angle += 72
-        ball.left(angle)
-        ball_speed *= -1
+        #angle += 72
+
 
     if ((ball.xcor() < goalie2.xcor() + 60 and ball.xcor() > goalie2.xcor() - 60) and (ball.ycor() < goalie2.ycor() + 60 and ball.ycor() > goalie2.ycor() - 60)):
         print("collision2")
-        ball_speed *= -1
+
 
 
 
