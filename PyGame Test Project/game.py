@@ -1,13 +1,13 @@
 import turtle
 import random
-import time
 
-#screen setup
+
+# screen setup
 screen = turtle.Screen()
 screen.setup(1000, 700)
 screen.bgcolor("green")
 
-#goal1 setup
+# goal1 setup
 goal1 = turtle.Turtle()
 goal1.color("brown")
 goal1.shape("square")
@@ -15,7 +15,7 @@ goal1.penup()
 goal1.goto(-490, 0)
 goal1.turtlesize(stretch_wid=20, stretch_len=10)
 
-#goal2 setup
+# goal2 setup
 goal2 = turtle.Turtle()
 goal2.color("brown")
 goal2.shape("square")
@@ -23,7 +23,7 @@ goal2.penup()
 goal2.goto(490, 0)
 goal2.turtlesize(stretch_wid=20, stretch_len=10)
 
-#ball setup
+# ball setup
 ball = turtle.Turtle()
 ball.color("#cdd4c7")
 ball.shape("circle")
@@ -33,7 +33,7 @@ ball.turtlesize(1.5)
 
 
 
-#pen
+# pen
 pen = turtle.Turtle()
 pen.color("black")
 pen.penup()
@@ -110,7 +110,7 @@ def ball_move():
 
 
 
-#player 1 setup
+# player 1 setup
 goalie1 = turtle.Turtle()
 goalie1.color("#2914e3")
 goalie1.shape("turtle")
@@ -119,7 +119,7 @@ goalie1.goto(-390, 0)
 goalie1.turtlesize(3)
 goalie1.left(90)
 
-#player 2 setup
+# player 2 setup
 goalie2 = turtle.Turtle()
 goalie2.color("#2914e3")
 goalie2.shape("turtle")
@@ -154,20 +154,18 @@ def goalie1_move_down():
 
 
 def check_score(goalie1_score, goalie2_score):
-    if(goalie2_score == 15 and goalie2_score > goalie1_score):
+    if(goalie2_score == 5 and goalie2_score > goalie1_score):
         pen.clear()
         pen.write("Goalie 2 won!", align="center", font=("Courier", 24, "normal"))
         ball.goto(0, 0)
         ball.color("#e3d624")
 
 
-    if(goalie1_score == 15 and goalie1_score > goalie2_score):
+    if(goalie1_score == 5 and goalie1_score > goalie2_score):
         pen.clear()
         pen.write("Goalie 1 won!", align="center", font=("Courier", 24, "normal"))
         ball.goto(0, 0)
         ball.color("#e3d624")
-
-
 
 
 screen.listen()
